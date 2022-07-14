@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="JmixProjectModulesStateV2">
+    <option name="hasState" value="true" />
+    <option name="moduleState">
+      <JmixModuleStateV2>
+        <option name="artifactVersion" value="unspecified" />
+        <option name="buildFilePath" value="$MODULE_DIR$/../../build.gradle" />
+        <option name="buildSystemName" value="Gradle" />
+        <option name="compositeProjectRoot" value="true" />
+        <option name="mavenLocalURI" value="file:$MAVEN_REPOSITORY$/" />
+        <option name="moduleName" value="composite3-all" />
+        <option name="rootBuildFilePath" value="$MODULE_DIR$/../../build.gradle" />
+        <option name="rootProjectName" value="composite3-all" />
+      </JmixModuleStateV2>
+    </option>
+  </component>
+</module>
