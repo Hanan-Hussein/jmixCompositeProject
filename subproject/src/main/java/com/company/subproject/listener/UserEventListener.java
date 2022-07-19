@@ -11,6 +11,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class UserEventListener {
     @Autowired
     private Metadata metadata;
@@ -22,6 +23,24 @@ public class UserEventListener {
 
     @EventListener
     public void onUserSaving(EntitySavingEvent<User> event) {
-
+        
     }
+//    private ApplicationUser backoffice(User user) {
+//        ApplicationUser applicationUser = metadata.create(ApplicationUser.class);
+//        applicationUser.setUserName(user.getUsername());
+//        applicationUser.setPreferredName(user.getFirstName());
+//        applicationUser.setEmail(user.getEmail());
+//        applicationUser.setActive(user.getActive());
+////        final List<Role> userRoles = user.getUserRoles().stream().map(UserRole::getRole).collect(Collectors.toList());
+////        applicationUser.setUserRoles(userRoles);
+//        applicationUser.setFirstName(user.getFirstName());
+//        applicationUser.setMiddleName(user.getLastName());
+//        applicationUser.setSurname(user.getLastName());
+//        return applicationUser;
+//    }
+//
+
+   
+
+
 }

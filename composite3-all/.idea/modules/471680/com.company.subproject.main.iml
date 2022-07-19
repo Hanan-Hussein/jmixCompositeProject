@@ -5,7 +5,10 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Jmix EclipseLink" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="main" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -27,6 +30,7 @@
           <Dependency configuration="implementation" group="io.jmix.core" name="jmix-core-starter" />
           <Dependency configuration="implementation" group="io.jmix.data" name="jmix-eclipselink-starter" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-starter" />
+          <Dependency configuration="implementation" group="org.json" name="json" version="20220320" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-data-starter" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-themes-compiled" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-widgets-compiled" />

@@ -14,21 +14,29 @@ import java.util.Date;
 import java.util.UUID;
 
 @JmixEntity
-@MappedSuperclass
-public class MakerCheckerEntity {
+@Table(name = "APPROVAL_MESSAGE")
+@Entity
+public class ApprovalMessage {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
-    @Column(name = "UPDATE_DATA")
-    private String updateData;
+    @Column(name = "MESSAGE")
+    private String message;
 
-    @Column(name = "APPROVAL_STATUS")
-    private String approvalStatus;
+    @Column(name = "ENTITY_NAME")
+    private String entityName;
 
-    @Column(name = "ACTION_")
-    private String action;
+    @Column(name = "APPROVED")
+    private Boolean approved;
+
+    @Column(name = "ENTITY_ID")
+    private UUID entityId;
+
+    @Column(name = "VERSION", nullable = false)
+    @Version
+    private Integer version;
 
     @CreatedBy
     @Column(name = "CREATED_BY")
@@ -57,40 +65,36 @@ public class MakerCheckerEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    @Column(name = "VERSION", nullable = false)
-    @Version
-    private Integer version;
-
-    public void setApprovalStatus(ApproveStatus approvalStatus) {
-        this.approvalStatus = approvalStatus == null ? null : approvalStatus.getId();
+    public UUID getEntityId() {
+        return entityId;
     }
 
-    public ApproveStatus getApprovalStatus() {
-        return approvalStatus == null ? null : ApproveStatus.fromId(approvalStatus);
+    public void setEntityId(UUID entityId) {
+        this.entityId = entityId;
     }
 
-    public ActionStatus getAction() {
-        return action == null ? null : ActionStatus.fromId(action);
+    public Boolean getApproved() {
+        return approved;
     }
 
-    public void setAction(ActionStatus action) {
-        this.action = action == null ? null : action.getId();
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 
-    public String getUpdateData() {
-        return updateData;
+    public String getEntityName() {
+        return entityName;
     }
 
-    public void setUpdateData(String updateData) {
-        this.updateData = updateData;
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
     }
 
-    public Integer getVersion() {
-        return version;
+    public String getMessage() {
+        return message;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Date getDeletedDate() {
@@ -141,16 +145,19 @@ public class MakerCheckerEntity {
         this.createdBy = createdBy;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
-    }
-    @PrePersist
-    public void prePersist() {
-        this.setApprovalStatus(ApproveStatus.NOT_APPROVED);
-        this.setAction(ActionStatus.CREATION);
     }
 }
