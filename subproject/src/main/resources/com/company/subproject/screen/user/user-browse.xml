@@ -45,6 +45,8 @@
                        />
                 <action id="decline" caption="Decline agent" icon="font-icon:BAN" trackSelection="true"
                         />
+                <action id="showSnapshots" caption="Show Changes" icon="font-icon:HISTORY" visible="false"
+                        trackSelection="true"/>
                 <action id="remove" type="remove"/>
                 <action id="showRoleAssignments" type="showRoleAssignments"/>
                 <action id="showUserSubstitutions" type="showUserSubstitutions"/>
@@ -60,15 +62,18 @@
                 <column id="timeZoneId"/>
                 <column id="active"/>
                 <column id="approvalStatus"/>
+                <column id="action"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn" action="usersTable.create"/>
                 <button id="editBtn" action="usersTable.edit"/>
-                <button id="approveBtn" action="usersTable.approve"/>
-                <button id="declineBtn" action="usersTable.decline"/>
+                <button id="approveBtn" action="usersTable.approve" visible="false"/>
+                <button id="declineBtn" action="usersTable.decline" visible="false"/>
                 <button id="removeBtn" action="usersTable.remove"/>
+                <button id="showSnapshotsBtn" action="usersTable.showSnapshots"/>
+
                 <button id="showRoleAssignmentsBtn" action="usersTable.showRoleAssignments"/>
                 <popupButton id="additionalActionsBtn" caption="msg://additional" icon="GEARS">
                     <actions>

@@ -1,20 +1,28 @@
 package com.company.subproject.screen.user;
 
 import com.company.subproject.app.MakerCheckerService;
+import com.company.subproject.entity.ApproveStatus;
 import com.company.subproject.entity.User;
+import io.jmix.audit.snapshot.EntitySnapshotManager;
+import io.jmix.audit.snapshot.model.EntitySnapshotModel;
+import io.jmix.core.AccessManager;
 import io.jmix.core.Metadata;
 import io.jmix.core.Resources;
+import io.jmix.core.accesscontext.SpecificOperationAccessContext;
+import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.security.role.annotation.SpecificPolicy;
 import io.jmix.ui.Dialogs;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.action.Action;
+import io.jmix.ui.action.BaseAction;
 import io.jmix.ui.action.DialogAction;
 import io.jmix.ui.action.list.CreateAction;
 
+import io.jmix.ui.action.list.RemoveAction;
 import io.jmix.ui.app.inputdialog.DialogActions;
 import io.jmix.ui.app.inputdialog.DialogOutcome;
 import io.jmix.ui.app.inputdialog.InputParameter;
-import io.jmix.ui.component.Button;
 import io.jmix.ui.component.Field;
 import io.jmix.ui.component.GroupTable;
 import io.jmix.ui.component.TextArea;
@@ -48,12 +56,28 @@ public class UserBrowse extends StandardLookup<User> {
     private GroupTable<User> usersTable;
     @Inject
     private CollectionLoader<User> usersDl;
+
     @Autowired
     private UiComponents uiComponents;
+    @Named("usersTable.approve")
+    private BaseAction userTableApprove;
+    @Named("usersTable.decline")
+    private BaseAction userTableDecline;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+    @Named("usersTable.remove")
+    private RemoveAction<User> userTableRemove;
     @Inject
     private MakerCheckerService makerCheckerService;
     @Autowired
     private Resources resources;
+
+    @Autowired
+    private EntitySnapshotManager entitySnapshotManager;
+    @Autowired
+    private AccessManager accessManager;
+    @Named("usersTable.showSnapshots")
+    private BaseAction userTableShowSnapshots;
 
     public UserBrowse() {
     }
@@ -61,7 +85,41 @@ public class UserBrowse extends StandardLookup<User> {
     @Subscribe
     public void onInit(InitEvent event) {
 
+        SpecificOperationAccessContext accessContext = new SpecificOperationAccessContext("maker");
+        accessManager.applyRegisteredConstraints(accessContext);
+
+//
+       userTableCreate.setEnabled(accessContext.isPermitted());
+        userTableRemove.setEnabled(accessContext.isPermitted());
+//        userTableCreate.setEnabled(accessContext);
+//        userTableRemove.setEnabled(accessContext);
+
+        String login = currentAuthentication.getUser().getUsername();
+        usersDc.addItemChangeListener(e -> {
+            if (usersDc.getItemOrNull() == null) return;
+            User selectedEntity = usersDc.getItem();
+            ApproveStatus approvalStatus = selectedEntity.getApprovalStatus();
+            boolean isTheMaker = login.equals(selectedEntity.getCreatedBy());
+            boolean showApproveMenu = approvalStatus.equals(ApproveStatus.NOT_APPROVED);
+            SpecificOperationAccessContext checkerContext = new SpecificOperationAccessContext("checker");
+            accessManager.applyRegisteredConstraints(checkerContext);
+            boolean canShowMenu = checkerContext.isPermitted()&& showApproveMenu && !isTheMaker;
+
+            EntitySnapshotModel lastEntitySnapshot = entitySnapshotManager.getLastEntitySnapshot(selectedEntity);
+         /*   EntitySnapshot snapshot = entitySnapshotService.getSnapshots(metadata.getClass(Agent.class), selectedEntity.getId())
+                    .stream().dropWhile(entitySnapshot -> entitySnapshot.getChangeDate() == selectedEntity.getUpdateTs()).findFirst().get();*/
+            boolean equals = false;
+            if (lastEntitySnapshot != null && selectedEntity.getUpdateData() != null) {
+                User agentSnapshot = (User) entitySnapshotManager.extractEntity(lastEntitySnapshot);
+
+                equals = agentSnapshot != (selectedEntity);
+            }
+            userTableApprove.setVisible(!equals && canShowMenu);
+            userTableDecline.setVisible(!equals && canShowMenu);
+            userTableShowSnapshots.setVisible(equals && canShowMenu);
+        });
     }
+
     private Supplier<Field> getMessageField() {
         return () -> {
             TextArea webTextArea =uiComponents.create(TextArea.class);
