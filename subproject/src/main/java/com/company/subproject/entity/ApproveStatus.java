@@ -8,7 +8,8 @@ import javax.annotation.Nullable;
 public enum ApproveStatus implements EnumClass<String> {
 
     APPROVED("Approved"),
-    NOT_APPROVED("Un_approved");
+    NOT_APPROVED("Un_approved"),
+    DECLINED("Declined");
 
     private String id;
 

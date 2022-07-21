@@ -2,7 +2,6 @@ package com.company.subproject.entity;
 
 import io.jmix.core.HasTimeZone;
 import io.jmix.core.annotation.Secret;
-import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.SystemLevel;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -14,23 +13,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.UUID;
 
 @JmixEntity
 @Entity
 @Table(name = "USER_", indexes = {
         @Index(name = "IDX_USER__ON_USERNAME", columnList = "USERNAME", unique = true)
 })
-public class User implements JmixUserDetails, HasTimeZone {
-
-    @Id
-    @Column(name = "ID", nullable = false)
-    @JmixGeneratedValue
-    private UUID id;
-
-    @Version
-    @Column(name = "VERSION", nullable = false)
-    private Integer version;
+public class User extends MakerChecker implements JmixUserDetails, HasTimeZone {
 
     @Column(name = "USERNAME", nullable = false)
     protected String username;
@@ -58,22 +47,6 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getPassword() {
         return password;

@@ -4,6 +4,9 @@
     <menu id="application" caption="msg://com.company.subproject/menu.application" insertBefore="administration">
         <item screen="User.browse" caption="msg://com.company.subproject.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="UserViewchangesScreen"
+              caption="msg://com.company.subproject.screen.userviewchanges/userViewchangesScreen.caption"/>
     </menu>
+    <item screen="Country.browse" caption="msg://com.company.subproject.screen.country/countryBrowse.menu"/>
 
 </menu-config>

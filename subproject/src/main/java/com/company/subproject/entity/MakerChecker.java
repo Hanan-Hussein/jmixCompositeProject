@@ -15,20 +15,29 @@ import java.util.UUID;
 
 @JmixEntity
 @MappedSuperclass
-public class MakerCheckerEntity {
+public class MakerChecker {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
+    @Lob
     @Column(name = "UPDATE_DATA")
     private String updateData;
+
+    @Lob
+    @Column(name = "MESSAGE")
+    private String message;
 
     @Column(name = "APPROVAL_STATUS")
     private String approvalStatus;
 
     @Column(name = "ACTION_")
     private String action;
+
+    @Column(name = "VERSION", nullable = false)
+    @Version
+    private Integer version;
 
     @CreatedBy
     @Column(name = "CREATED_BY")
@@ -57,18 +66,6 @@ public class MakerCheckerEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    @Column(name = "VERSION", nullable = false)
-    @Version
-    private Integer version;
-
-    public void setApprovalStatus(ApproveStatus approvalStatus) {
-        this.approvalStatus = approvalStatus == null ? null : approvalStatus.getId();
-    }
-
-    public ApproveStatus getApprovalStatus() {
-        return approvalStatus == null ? null : ApproveStatus.fromId(approvalStatus);
-    }
-
     public ActionStatus getAction() {
         return action == null ? null : ActionStatus.fromId(action);
     }
@@ -77,20 +74,28 @@ public class MakerCheckerEntity {
         this.action = action == null ? null : action.getId();
     }
 
+    public ApproveStatus getApprovalStatus() {
+        return approvalStatus == null ? null : ApproveStatus.fromId(approvalStatus);
+    }
+
+    public void setApprovalStatus(ApproveStatus approvalStatus) {
+        this.approvalStatus = approvalStatus == null ? null : approvalStatus.getId();
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public String getUpdateData() {
         return updateData;
     }
 
     public void setUpdateData(String updateData) {
         this.updateData = updateData;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public Date getDeletedDate() {
@@ -139,6 +144,14 @@ public class MakerCheckerEntity {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public UUID getId() {

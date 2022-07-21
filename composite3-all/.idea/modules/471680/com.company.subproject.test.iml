@@ -17,6 +17,7 @@
           <Dependency configuration="implementation" group="io.jmix.core" name="jmix-core-starter" />
           <Dependency configuration="implementation" group="io.jmix.data" name="jmix-eclipselink-starter" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-starter" />
+          <Dependency configuration="implementation" group="org.json" name="json" version="20220320" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-data-starter" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-themes-compiled" />
           <Dependency configuration="implementation" group="io.jmix.ui" name="jmix-ui-widgets-compiled" />
@@ -27,6 +28,8 @@
           <Dependency configuration="implementation" group="io.jmix.datatools" name="jmix-datatools-starter" />
           <Dependency configuration="implementation" group="io.jmix.datatools" name="jmix-datatools-ui-starter" />
           <Dependency configuration="implementation" group="org.springframework.boot" name="spring-boot-starter-web" />
+          <Dependency configuration="implementation" group="io.jmix.audit" name="jmix-audit-ui-starter" />
+          <Dependency configuration="implementation" group="io.jmix.audit" name="jmix-audit-starter" />
           <Dependency configuration="runtimeOnly" group="org.hsqldb" name="hsqldb" />
           <Dependency configuration="testImplementation" group="org.springframework.boot" name="spring-boot-starter-test">
             <ExcludeRule group="org.junit.vintage" module="junit-vintage-engine" />
