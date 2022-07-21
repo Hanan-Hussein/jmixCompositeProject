@@ -43,6 +43,7 @@
                 <checkBox id="activeField" property="active"/>
             </column>
         </form>
+
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>

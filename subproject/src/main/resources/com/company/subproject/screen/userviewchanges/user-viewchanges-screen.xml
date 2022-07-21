@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://userViewchangesScreen.caption">
+    <layout width="AUTO" spacing="true" expand="vbox" height="AUTO" stylename="well">
+        <vbox id="vbox" height="AUTO" width="100%"
+              spacing="true" margin="false,true,true,true" stylename="compact no-stripes" responsive="true"
+              align="TOP_CENTER"
+              expand="form">
+            <form id="form" width="100%" xml:space="preserve" responsive="true" stylename="well"
+                  childrenCaptionWidth="AUTO">
+                <column>
+                    <label id="title" property="Title" stylename="h3" htmlEnabled="true"
+                           align="MIDDLE_CENTER" description="Entity Property" value="Field Name"/>
+                    <label id="userNameId" htmlEnabled="true"
+                           description="User Name" stylename="h4" align="BOTTOM_LEFT" value="User Name"/>
+                    <label id="emailAddressId" icon="font-icon:INBOX" htmlEnabled="true"
+                           description="Email Address" stylename="h4" align="BOTTOM_LEFT" value="Email Address"/>
+
+                    <label id="activeId" icon="USER_O" htmlEnabled="true"
+                           description="Active" stylename="h4" align="BOTTOM_LEFT" value="Agent"/>
+                </column>
+                <column>
+                    <label id="currentvalue" property="Current value" stylename="h3"
+                           align="MIDDLE_CENTER" description="Value before modification" value="Current Value"/>
+                    <textField id="userNameField" property="businessName" editable="false" visible="false"
+                               align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+                    <textField id="emailAddressField" property="emailAddress" editable="false" visible="false"
+                               align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+
+                    <textField id="activeField" property="active" editable="false" visible="false"
+                               align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+                </column>
+                <column>
+                    <label id="prevalue" stylename="h3"
+                           align="MIDDLE_CENTER" description="Modifield Value.. to be commited on approval"
+                           value="New Value" icon="font-icon:ADJUST"/>
+                    <textField id="userName2Field" property="userName2" editable="false" visible="false"
+                               align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+                    <textField id="emailAddress2Field" property="emailAddress2" editable="false" visible="false"
+                               align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+
+                    <textField id="active2Field" property="active2" editable="false"
+                               visible="false" align="MIDDLE_LEFT"
+                               stylename="borderless" responsive="true"/>
+                </column>
+            </form>
+            <buttonsPanel align="BOTTOM_RIGHT" responsive="true" margin="false,true,false,false">
+                <button id="approveBtn" caption="Approve" icon="font-icon:CHECK" stylename="primary friendly"
+                        responsive="true"/>
+                <button id="declineBtn" caption="Decline" icon="font-icon:BAN" stylename="danger" responsive="true"/>
+            </buttonsPanel>
+        </vbox>
+    </layout>
+
+</window>

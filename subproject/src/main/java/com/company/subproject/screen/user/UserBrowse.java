@@ -3,6 +3,7 @@ package com.company.subproject.screen.user;
 import com.company.subproject.app.MakerCheckerService;
 import com.company.subproject.entity.ApproveStatus;
 import com.company.subproject.entity.User;
+import com.company.subproject.screen.userviewchanges.UserViewchangesScreen;
 import io.jmix.audit.snapshot.EntitySnapshotManager;
 import io.jmix.audit.snapshot.model.EntitySnapshotModel;
 import io.jmix.core.AccessManager;
@@ -30,12 +31,15 @@ import io.jmix.ui.model.CollectionContainer;
 import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collections;
+import java.util.UUID;
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 @UiController("User.browse")
 @UiDescriptor("user-browse.xml")
@@ -81,6 +85,8 @@ public class UserBrowse extends StandardLookup<User> {
 
     public UserBrowse() {
     }
+//
+
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -95,6 +101,7 @@ public class UserBrowse extends StandardLookup<User> {
 //        userTableRemove.setEnabled(accessContext);
 
         String login = currentAuthentication.getUser().getUsername();
+
         usersDc.addItemChangeListener(e -> {
             if (usersDc.getItemOrNull() == null) return;
             User selectedEntity = usersDc.getItem();
@@ -126,6 +133,12 @@ public class UserBrowse extends StandardLookup<User> {
             webTextArea.setRows(7);
             return webTextArea;
         };
+    }
+
+    @Subscribe
+    public void onAfterShow(AfterShowEvent event) {
+        usersTable.setSelected(Collections.emptyList());
+        usersDl.load();
     }
     @Subscribe("usersTable.approve")
     public void onAgentsTableApprove(Action.ActionPerformedEvent event) {
@@ -172,7 +185,20 @@ public class UserBrowse extends StandardLookup<User> {
             }).show();
         }), new DialogAction(DialogAction.Type.NO)).show();
     }
+    @Subscribe("usersTable.showSnapshots")
+    public void onAgentsTableShowSnapshots(Action.ActionPerformedEvent event) {
+        UserViewchangesScreen screen = screenBuilders.screen(this).withScreenClass(UserViewchangesScreen.class).withOpenMode(OpenMode.DIALOG).build();
 
+        UUID id = usersDc.getItem().getId();
+        screen.setEntityId(id);
+        screen.setEntity(usersDc.getItem());
+        screen.addAfterCloseListener(afterCloseEvent -> {
+            usersTable.setSelected(Collections.emptyList());
+            usersDl.load();
+            //showSnapshotsBtn.setEnabled(true);
+        });
+        screen.show();
+    }
 
 
 

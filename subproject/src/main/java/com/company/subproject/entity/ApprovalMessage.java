@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "APPROVAL_MESSAGE")
+@Table(name = "COMP_APPROVAL_MESSAGE")
 @Entity
 public class ApprovalMessage {
     @JmixGeneratedValue
@@ -65,6 +65,14 @@ public class ApprovalMessage {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public UUID getEntityId() {
         return entityId;
     }
@@ -87,14 +95,6 @@ public class ApprovalMessage {
 
     public void setEntityName(String entityName) {
         this.entityName = entityName;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Date getDeletedDate() {

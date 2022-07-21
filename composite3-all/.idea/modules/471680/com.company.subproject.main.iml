@@ -7,7 +7,7 @@
         <setting name="provider-name" value="Jmix EclipseLink" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" />
-          <factory-entry name="main" />
+          <factory-entry name="main" value="3f556501-f9db-45ff-be62-ea9a19407cc5" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

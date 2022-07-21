@@ -31,6 +31,7 @@ public class MakerCheckerService {
     @Autowired
     private EntitySerialization entitySerialization;
 
+    @Transactional
     public void onUpdateMakerChecker(MakerChecker makerCheckerEntity, String updateJson) {
 //        try (Transaction tx = persistence.createTransaction()) {
             JSONObject jsonObject = new JSONObject(entitySerialization.toJson(makerCheckerEntity));
@@ -72,16 +73,16 @@ public class MakerCheckerService {
 //                entityManager.persist(makerCheckerEntity);
 
         }
-        else{
+        else {
             JSONObject jsonObject = new JSONObject(makerCheckerEntity.getUpdateData());
             String entityName = jsonObject.getString("_entityName");
             //save the message
             saveApprovalMessage(message,entityName , approved, makerCheckerEntity.getId());
 
-//            EntityManager em = persistence.getEntityManager();
+
             MakerChecker intendedChange = entitySerialization.entityFromJson(makerCheckerEntity.getUpdateData(), metadata.getClass(entityName));
-//            intendedChange.setUpdateData(null);
-//            intendedChange.setVersion(makerCheckerEntity.getVersion());
+            intendedChange.setUpdateData(null);
+            intendedChange.setVersion(makerCheckerEntity.getVersion());
             intendedChange.setMessage(message);
             intendedChange.setApprovalStatus(approveStatus);
             intendedChange.setAction(ActionStatus.MODIFICATION);

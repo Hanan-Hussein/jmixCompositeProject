@@ -1,18 +1,24 @@
 package com.company.subproject.screen.user;
 
+import com.company.subproject.app.MakerCheckerService;
 import com.company.subproject.entity.User;
+import io.jmix.audit.snapshot.EntitySnapshotManager;
+import io.jmix.core.EntitySerialization;
 import io.jmix.core.EntityStates;
 import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.component.ComboBox;
 import io.jmix.ui.component.PasswordField;
 import io.jmix.ui.component.TextField;
+import io.jmix.ui.model.CollectionContainer;
 import io.jmix.ui.model.DataContext;
+import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -48,6 +54,14 @@ public class UserEdit extends StandardEditor<User> {
     private ComboBox<String> timeZoneField;
 
     private boolean isNewEntity;
+    @Inject
+    private InstanceContainer<User> userDc;
+    @Autowired
+    private EntitySnapshotManager entitySnapshotManager;
+    @Autowired
+    private MakerCheckerService makerCheckerService;
+    @Autowired
+    private EntitySerialization entitySerialization;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<User> event) {
@@ -66,6 +80,13 @@ public class UserEdit extends StandardEditor<User> {
 
     @Subscribe
     protected void onBeforeCommit(BeforeCommitChangesEvent event) {
+        entitySnapshotManager.createSnapshot(userDc.getItem(), Objects.requireNonNull(userDc.getFetchPlan()));
+        if (!entityStates.isNew(getEditedEntity())) {
+            makerCheckerService.onUpdateMakerChecker(getEditedEntity(), entitySerialization.toJson(getEditedEntity()));
+            event.preventCommit();
+            closeWithDiscard();
+
+        }
         if (entityStates.isNew(getEditedEntity())) {
             if (!Objects.equals(passwordField.getValue(), confirmPasswordField.getValue())) {
                 notifications.create(Notifications.NotificationType.WARNING)
@@ -73,6 +94,7 @@ public class UserEdit extends StandardEditor<User> {
                         .show();
                 event.preventCommit();
             }
+
             getEditedEntity().setPassword(passwordEncoder.encode(passwordField.getValue()));
         }
     }

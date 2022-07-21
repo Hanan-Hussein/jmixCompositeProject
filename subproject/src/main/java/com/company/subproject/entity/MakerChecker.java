@@ -21,9 +21,11 @@ public class MakerChecker {
     @Id
     private UUID id;
 
+    @Lob
     @Column(name = "UPDATE_DATA")
     private String updateData;
 
+    @Lob
     @Column(name = "MESSAGE")
     private String message;
 
