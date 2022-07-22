@@ -42,9 +42,9 @@
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="approve" caption="Approve agent" icon="font-icon:CHECK" trackSelection="true"
-                       />
+                      visible="false" />
                 <action id="decline" caption="Decline agent" icon="font-icon:BAN" trackSelection="true"
-                        />
+                       visible="false" />
                 <action id="showSnapshots" caption="Show Changes" icon="font-icon:HISTORY" visible="false"
                         trackSelection="true"/>
                 <action id="remove" type="remove"/>

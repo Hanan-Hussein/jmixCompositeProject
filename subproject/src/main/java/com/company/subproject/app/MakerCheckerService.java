@@ -91,6 +91,7 @@ public class MakerCheckerService {
        // try (Transaction tx = persistence.createTransaction()) {
 
             //entityManager.persist(intendedChange);
+
        // }
 //        catch (Exception e) {
 //            String action = approved ? "approving" : "declining";
