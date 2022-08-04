@@ -1,0 +1,8 @@
+@import "newTheme-defaults";
+@import "addons";
+@import "newTheme";
+
+.newTheme {
+  @include addons;
+  @include newTheme;
+}

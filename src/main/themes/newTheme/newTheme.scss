@@ -1,0 +1,12 @@
+@import "../helium/helium";
+
+@mixin newTheme {
+  @include helium;
+
+ .v-tabsheet-tabitemcell .v-tabsheet-tabitem-selected .v-caption.v-caption {
+   border: 5px solid blue;
+   color: white;
+   background: blue;
+  }
+
+}
