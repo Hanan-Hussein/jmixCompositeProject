@@ -26,7 +26,7 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout spacing="true" >
+    <layout spacing="true" margin="true" >
 
             <tabSheet >
                 <tab caption="Personal Information" id="tab_1" spacing="true" margin="true">
@@ -36,21 +36,23 @@
                             <column width="350px">
 
                                 <textField id="firstNameField" property="firstName" required="true"/>
-                                <textField id="middleNameField" property="middleName"/>
-                                <textField id="lastNameField" property="lastName"/>
-                                <textField id="nationalIdField" property="nationalId"/>
+                                <textField id="middleNameField" property="middleName" required="true"/>
+                                <textField id="lastNameField" property="lastName" required="true"/>
+                                <textField id="nationalIdField" property="nationalId" required="true"/>
 
 
 
                             </column>
                             <column width="350px" childrenCaptionAlignment="RIGHT">
-                                <textField id="addressField" property="address"/>
-                                <textField id="tinField" property="tin"/>
-                                <textField id="emailField" property="email"/>
+                                <textField id="addressField" property="address" required="true"/>
+                                <textField id="tinField" property="tin" required="true"/>
+                                <textField id="emailField" property="email" required="true"/>
 
 
                             </column>
                         </form>
+                    </groupBox>
+                    <groupBox caption="TENANT NEXT OF KIN" collapsable="true" collapsed="true">
                     </groupBox>
 
                 </tab>
@@ -59,12 +61,20 @@
 
                     <form id="form1" dataContainer="tenantDc">
                         <column width="350px">
-                            <entityPicker id="landlordField" property="landlord" required="true">
+                            <entitySuggestionField id="landlordField" property="landlord" required="true">
+
                                 <actions>
                                     <action id="entityLookup" type="entity_lookup"/>
                                     <action id="entityClear" type="entity_clear"/>
                                 </actions>
-                            </entityPicker>
+                                <query entityClass="com.company.subproject.entity.Landlord"
+                                       searchStringFormat="%${searchString}%"
+                                       escapeValueForLike="true"
+                                       fetchPlan="_instance_name">
+                                    <![CDATA[select c from Landlord c where lower(c.firstName)
+                like lower(:searchString) escape '\']]>
+                                </query>
+                            </entitySuggestionField>
                         </column>
                     </form>
 
