@@ -6,6 +6,8 @@
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
         <item screen="UserViewchangesScreen"
               caption="msg://com.company.subproject.screen.userviewchanges/userViewchangesScreen.caption"/>
+        <item screen="Tenant.browse" caption="msg://com.company.subproject.screen.tenant/tenantBrowse.menu"/>
+        <item screen="Landlord.browse" caption="msg://com.company.subproject.screen.landlord/landlordBrowse.menu"/>
     </menu>
     <item screen="Country.browse" caption="msg://com.company.subproject.screen.country/countryBrowse.menu"/>
 
