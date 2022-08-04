@@ -44,6 +44,8 @@ dependencies {
     }
     implementation 'io.jmix.audit:jmix-audit-ui-starter'
     implementation 'io.jmix.audit:jmix-audit-starter'
+    implementation 'io.jmix.security:jmix-security-oauth2-starter'
+    implementation 'io.jmix.rest:jmix-rest-starter'
 }
 
 test {

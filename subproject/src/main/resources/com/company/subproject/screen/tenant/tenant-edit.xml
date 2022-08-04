@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://tenantEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="tenantDc"
+                  class="com.company.subproject.entity.Tenant">
+            <fetchPlan extends="_base">
+                <property name="landlord" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" >
+
+            <tabSheet >
+                <tab caption="Personal Information" id="tab_1" spacing="true" margin="true">
+                    <label value=""/>
+                    <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="true">
+                        <form id="form" dataContainer="tenantDc">
+                            <column width="350px">
+
+                                <textField id="firstNameField" property="firstName" required="true"/>
+                                <textField id="middleNameField" property="middleName"/>
+                                <textField id="lastNameField" property="lastName"/>
+                                <textField id="nationalIdField" property="nationalId"/>
+
+
+
+                            </column>
+                            <column width="350px" childrenCaptionAlignment="RIGHT">
+                                <textField id="addressField" property="address"/>
+                                <textField id="tinField" property="tin"/>
+                                <textField id="emailField" property="email"/>
+
+
+                            </column>
+                        </form>
+                    </groupBox>
+
+                </tab>
+                <tab caption="Landlord Information" id="tab_2" spacing="true" margin="true">
+                    <label value="CORPORATE TENANT INFORMATION"/>
+
+                    <form id="form1" dataContainer="tenantDc">
+                        <column width="350px">
+                            <entityPicker id="landlordField" property="landlord" required="true">
+                                <actions>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityClear" type="entity_clear"/>
+                                </actions>
+                            </entityPicker>
+                        </column>
+                    </form>
+
+
+
+                </tab>
+
+            </tabSheet>
+
+        <hbox id="editActions" spacing="true" margin="true" align="MIDDLE_RIGHT">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose" caption="Save tenant" icon="font-icon:SAVE"/>
+            <button id="closeBtn" action="windowClose" caption="Cancel"/>
+        </hbox>
+    </layout>
+</window>
