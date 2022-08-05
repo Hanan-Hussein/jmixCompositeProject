@@ -33,22 +33,22 @@
             <tabSheet id="wizardTabSheet" >
                 <tab icon="branding/numberOne.png" caption="Personal Information" id="tab_1" spacing="true" margin="true" >
                     <label value=""/>
-                    <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="true" >
+                    <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="false" >
                         <form id="form" dataContainer="tenantDc" >
                             <column width="350px">
 
-                                <textField id="firstNameField" property="firstName" required="true" />
-                                <textField id="middleNameField" property="middleName" required="true"/>
-                                <textField id="lastNameField" property="lastName" required="true"/>
+                                <textField id="firstNameField" property="firstName" required="true"  stylename="tetx"/>
+                                <textField id="middleNameField" property="middleName" required="true"  stylename="tetx"/>
+                                <textField id="lastNameField" property="lastName" required="true"  stylename="tetx"/>
                                 <textField id="nationalIdField" property="nationalId" required="true"/>
 
 
 
                             </column>
-                            <column width="350px" childrenCaptionAlignment="RIGHT">
-                                <textField id="addressField" property="address" required="true"/>
-                                <textField id="tinField" property="tin" required="true"/>
-                                <textField id="emailField" property="email" required="true"/>
+                            <column width="350px" childrenCaptionAlignment="RIGHT"  >
+                                <textField id="addressField" property="address" required="true" stylename="colgap"/>
+                                <textField id="tinField" property="tin" required="true" stylename="colgap"/>
+                                <textField id="emailField" property="email" required="true" stylename="colgap"/>
 
 
                             </column>
@@ -85,6 +85,7 @@
 
                     <hbox id="nextActions2" spacing="true" margin="true" align="MIDDLE_RIGHT">
                         <button id="prevButton2" action="prevAction" caption="Previous"/>
+                        <button id="nextButton2" action="nextAction" caption="Next" />
                         <button id="nextButton2" action="nextAction" caption="Next" />
                     </hbox>
 
