@@ -30,8 +30,8 @@
                 width="800"/>
     <layout spacing="true" margin="true" >
 
-            <tabSheet id="wizardTabSheet">
-                <tab caption="Personal Information" id="tab_1" spacing="true" margin="true" width="100%">
+            <tabSheet id="wizardTabSheet" >
+                <tab icon="branding/numberOne.png" caption="Personal Information" id="tab_1" spacing="true" margin="true" >
                     <label value=""/>
                     <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="true" >
                         <form id="form" dataContainer="tenantDc" >
@@ -61,7 +61,7 @@
                     </hbox>
 
                 </tab>
-                <tab caption="Landlord Information" id="tab_2" spacing="true" margin="true">
+                <tab icon="branding/numberTwo.png" caption="Landlord Information" id="tab_2" spacing="true" margin="true" >
                     <label value="CORPORATE TENANT INFORMATION"/>
 
                     <form id="form1" dataContainer="tenantDc">
@@ -89,7 +89,7 @@
                     </hbox>
 
                 </tab>
-                <tab id="tab_3" spacing="true" caption="Confirmation" >
+                <tab icon="branding/numberThree.png" id="tab_3" spacing="true" caption="Confirmation" >
                     <groupBox caption="Individual Tenant Information"
                               collapsable="true" collapsed="false" width="100%"
                               css="border:none" stylename="confirm-details">
