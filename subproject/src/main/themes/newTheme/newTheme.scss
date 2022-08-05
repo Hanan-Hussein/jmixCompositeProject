@@ -7,5 +7,19 @@
    color: white;
    background: #108CFF;
   }
+  .v-textfield-readonly {
+    border: none;
+    background: none;
+  }
 
+  .jmix-captiontext-preformatted {
+    white-space: pre-wrap;
+    font-weight: bolder;
+  }
+
+  .jmix-groupbox-caption-confirm-details {
+    background: #F0F4F9 0% 0% no-repeat padding-box !important;
+    color: #108CFF !important;
+    width: 100%;
+  }
 }

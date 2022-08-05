@@ -23,19 +23,21 @@
         <action id="windowClose"
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
+        <action id="nextAction" caption="Save and Continue"/>
+        <action id="prevAction" caption="Previous"/>
     </actions>
     <dialogMode height="600"
                 width="800"/>
     <layout spacing="true" margin="true" >
 
-            <tabSheet >
-                <tab caption="Personal Information" id="tab_1" spacing="true" margin="true">
+            <tabSheet id="wizardTabSheet">
+                <tab caption="Personal Information" id="tab_1" spacing="true" margin="true" width="100%">
                     <label value=""/>
-                    <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="true">
-                        <form id="form" dataContainer="tenantDc">
+                    <groupBox caption="INDIVIDUAL TENANT INFORMATION" collapsable="true" collapsed="true" >
+                        <form id="form" dataContainer="tenantDc" >
                             <column width="350px">
 
-                                <textField id="firstNameField" property="firstName" required="true"/>
+                                <textField id="firstNameField" property="firstName" required="true" />
                                 <textField id="middleNameField" property="middleName" required="true"/>
                                 <textField id="lastNameField" property="lastName" required="true"/>
                                 <textField id="nationalIdField" property="nationalId" required="true"/>
@@ -54,6 +56,9 @@
                     </groupBox>
                     <groupBox caption="TENANT NEXT OF KIN" collapsable="true" collapsed="true">
                     </groupBox>
+                    <hbox id="nextActions" spacing="true" margin="true" align="MIDDLE_RIGHT">
+                        <button id="nextButton" action="nextAction" caption="Next" />
+                    </hbox>
 
                 </tab>
                 <tab caption="Landlord Information" id="tab_2" spacing="true" margin="true">
@@ -78,15 +83,46 @@
                         </column>
                     </form>
 
-
+                    <hbox id="nextActions2" spacing="true" margin="true" align="MIDDLE_RIGHT">
+                        <button id="prevButton2" action="prevAction" caption="Previous"/>
+                        <button id="nextButton2" action="nextAction" caption="Next" />
+                    </hbox>
 
                 </tab>
+                <tab id="tab_3" spacing="true" caption="Confirmation" >
+                    <groupBox caption="Individual Tenant Information"
+                              collapsable="true" collapsed="false" width="100%"
+                              css="border:none" stylename="confirm-details">
+                        <form id="form2" dataContainer="tenantDc">
+                            <column width="350px">
 
+                                <textField id="firstNameFieldView" property="firstName" required="true" editable="false"/>
+                                <textField id="middleNameFieldView" property="middleName" editable="false"/>
+                                <textField id="lastNameFieldView" property="lastName" editable="false"/>
+                                <textField id="nationalIdFieldView" property="nationalId" editable="false"/>
+
+
+
+                            </column>
+                            <column width="350px" childrenCaptionAlignment="RIGHT" >
+                                <textField id="addressFieldView" property="address" editable="false"/>
+                                <textField id="tinFieldView" property="tin" editable="false"/>
+                                <textField id="emailFieldView" property="email" editable="false"/>
+
+
+                            </column>
+                        </form>
+                    </groupBox>
+                    <hbox id="editActions" spacing="true" margin="true" align="MIDDLE_RIGHT">
+                        <button id="commitAndCloseBtn" action="windowCommitAndClose" caption="Save tenant" icon="font-icon:SAVE"/>
+                        <button id="closeBtn" action="windowClose" caption="Cancel"/>
+                    </hbox>
+                </tab>
             </tabSheet>
 
-        <hbox id="editActions" spacing="true" margin="true" align="MIDDLE_RIGHT">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose" caption="Save tenant" icon="font-icon:SAVE"/>
-            <button id="closeBtn" action="windowClose" caption="Cancel"/>
-        </hbox>
+<!--        <hbox id="editActions" spacing="true" margin="true" align="MIDDLE_RIGHT">-->
+<!--            <button id="commitAndCloseBtn" action="windowCommitAndClose" caption="Save tenant" icon="font-icon:SAVE"/>-->
+<!--            <button id="closeBtn" action="windowClose" caption="Cancel"/>-->
+<!--        </hbox>-->
     </layout>
 </window>
